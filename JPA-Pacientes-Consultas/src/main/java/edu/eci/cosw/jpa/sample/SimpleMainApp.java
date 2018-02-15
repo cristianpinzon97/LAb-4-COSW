@@ -16,6 +16,11 @@
  */
 package edu.eci.cosw.jpa.sample;
 
+import edu.eci.cosw.jpa.sample.model.*;
+import java.util.Calendar;
+import java.util.Set;
+import java.util.Date;
+import java.util.HashSet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,13 +33,25 @@ import org.hibernate.service.ServiceRegistry;
  * @author hcadavid
  */
 public class SimpleMainApp {
-   
-    public static void main(String a[]){
-        SessionFactory sf=getSessionFactory();
-        Session s=sf.openSession();
-        Transaction tx=s.beginTransaction();
-        
-        tx.commit();    
+
+    public static void main(String a[]) {
+        SessionFactory sf = getSessionFactory();
+        Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        Paciente pacient = (Paciente) s.load(Paciente.class, new PacienteId(3, "cc"));
+        System.out.println("id:"+pacient.getId()+"Nombre: "+pacient.getNombre());
+        try {
+            for (Consulta c : pacient.getConsultas()) {
+                System.out.println(c.getResumen());
+            }
+        } catch (Exception e) {
+            System.out.println("El usuario no tiene Consultas asignadas.");
+        }
+        Consulta newConsult =new Consulta(new java.sql.Date(Calendar.getInstance().getTime().getTime()), "Descripcion: "+pacient.getNombre());
+        pacient.getConsultas().add(newConsult);
+        s.saveOrUpdate(pacient);
+        tx.commit();
         s.close();
         sf.close();
 
@@ -45,7 +62,7 @@ public class SimpleMainApp {
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
         ServiceRegistry serviceRegistry
                 = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
+                        .applySettings(configuration.getProperties()).build();
 
         // builds a session factory from the service registry
         SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
