@@ -38,6 +38,7 @@ public class Paciente  implements java.io.Serializable {
     }
    
     @EmbeddedId
+    @Column(name="id", nullable=false, length=45)
     public PacienteId getId() {
         return this.id;
     }
@@ -64,10 +65,10 @@ public class Paciente  implements java.io.Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    @OneToMany(cascade=ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumns({
-        @JoinColumn(name="PACIENTES_id", referencedColumnName="id"),
-        @JoinColumn(name="PACIENTES_tipo_id", referencedColumnName="tipo_id")
+        @JoinColumn(name="PACIENTES_id", referencedColumnName="id", nullable=false),
+        @JoinColumn(name="PACIENTES_tipo_id", referencedColumnName="tipo_id", nullable=false)
     })
     public Set<Consulta> getConsultas() {
         return this.consultas;

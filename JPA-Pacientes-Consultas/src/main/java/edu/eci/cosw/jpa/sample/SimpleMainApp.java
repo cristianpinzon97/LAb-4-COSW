@@ -40,10 +40,12 @@ public class SimpleMainApp {
         Transaction tx = s.beginTransaction();
 
         Paciente pacient = (Paciente) s.load(Paciente.class, new PacienteId(3, "cc"));
-        System.out.println("id:"+pacient.getId()+"Nombre: "+pacient.getNombre());
+        System.out.println("id:"+pacient.getId()+" Nombre: "+pacient.getNombre()+" consultas: "+pacient.getConsultas().toString());
+        System.out.println("ºººººººººººººººººººººººººººººººººººººººººººººººººººº");
         try {
             for (Consulta c : pacient.getConsultas()) {
                 System.out.println(c.getResumen());
+                System.out.println("||||||||||||||||||||||||||||||||||||||||||||");
             }
         } catch (Exception e) {
             System.out.println("El usuario no tiene Consultas asignadas.");

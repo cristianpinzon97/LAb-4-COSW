@@ -44,7 +44,7 @@ public class Consulta  implements java.io.Serializable {
         this.fechaYHora = fechaYHora;
     }
 
-    @Column(name="resumen", nullable=false, length=45)
+    @Column(name="resumen", nullable=false, length=512)
     public String getResumen() {
         return this.resumen;
     }

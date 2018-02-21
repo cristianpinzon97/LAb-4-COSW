@@ -4,14 +4,20 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">bdprueba</property>
-    <property name="hibernate.connection.password">bdprueba</property>
+    <property name="hibernate.connection.url">jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10222371?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">sql10222371</property>
+    <property name="hibernate.connection.password">wQ4NmFRz5Z</property>
   
   
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
     <property name="use_sql_comments">true</property>
+    
+    
+    
+    <mapping class="edu.eci.cosw.jpa.sample.model.Cliente"/>
+    <mapping class="edu.eci.cosw.jpa.sample.model.PolizaAprobada"/>
+    <mapping class="edu.eci.cosw.jpa.sample.model.TipoPoliza"/>
 
   
   </session-factory>
